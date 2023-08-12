@@ -1,6 +1,7 @@
-async function signUpFormHandler (event) {
+async function signUpFormHandler (e) {
+    e.preventDefault();
 
-    const username = document.querySelector('.sign-up-username').value.trim();
+    const username = document.querySelector('.sign-up-name').value.trim();
     const email = document.querySelector('.sign-up-email').value.trim();
     const password = document.querySelector('.sign-up-password').value.trim();
 
@@ -14,6 +15,7 @@ async function signUpFormHandler (event) {
 
         if (response.ok) {
             //new account has been created
+            // document.location.href()
         } else {
             //refresh the page
         }
@@ -22,14 +24,14 @@ async function signUpFormHandler (event) {
 
 async function logInFormHandler (event) {
     
-    const email = document.querySelector(".login-email").value.trim();
-    const password = document.querySelector(".login-password").value.trim();
+    const username = document.querySelector(".log-in-username").value.trim();
+    const password = document.querySelector(".log-in-password").value.trim();
 
-    if (email && password) {
-        //boolean
+    if (username && password) {
+        
         const response = fetch('/api/users/login', {
             method: 'POST',
-            body: JSON.stringify({email, password}),
+            body: JSON.stringify({username, password}),
             headers: { "Content-Type": "application/json"}
         })
 
@@ -43,6 +45,7 @@ async function logInFormHandler (event) {
 
     }
 }
+
 document
     .querySelector(".log-in-form")
     .addEventListener("submit", logInFormHandler);

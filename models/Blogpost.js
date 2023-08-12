@@ -1,9 +1,10 @@
 const { Model, DataTypes } = require('sequelize');
-const sequelize = require('../config/connection');
+const sequelize = require('../config/connections');
 
 class Blogpost extends Model {};
 
 Blogpost.init(
+    
     {
         //define columns
         id: {
@@ -19,17 +20,24 @@ Blogpost.init(
 
         },
 
+        date_created: {
+            type: DataTypes.DATE,
+            allowNull: false,
+            defaultValue: DataTypes.NOW,
+        },
+
         body: {
             type: DataTypes.TEXT,
             allowNull: false,
         },
 
-        user_id: {
-            type: DataTypes.INTEGER,
+
+        username: {
+            type: DataTypes.STRING,
 
             references: {
                 model: 'user',
-                key: 'id',
+                key: 'username',
             }
         }
     },

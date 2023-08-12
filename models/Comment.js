@@ -12,23 +12,34 @@ Comment.init(
             allowNull: false,
 
         },
+
+        text: {
+            type: DataTypes.STRING,
+            allowNull: false,
+        },
       
         blogpost_id: {
+            type: DataTypes.INTEGER,
+            allowNull: false,
+            
             references: {
                 model: 'blogpost',
                 key: 'id',
             }
         },
 
-        user_id: {
+        username: {
+            type: DataTypes.STRING,
+            allowNull: false,
+
             references: {
                 model: 'user',
-                key: 'id',
+                key: 'username',
             }
         }
     },
     {
-        sequelize: true,
+        sequelize,
         timestamps: false,
         freezeTableName: true,
         underscored: true,

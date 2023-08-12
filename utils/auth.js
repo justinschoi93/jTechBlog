@@ -3,7 +3,7 @@
 //before allowing the route to execute the next callback function. 
 //Otherwise, the user will be redirected to the login page. 
 
-const withAuth = async (req, res) => {
+const withAuth = async (req, res, next) => {
 
     if (!req.session.loggedIn){
         res.redirect('/login');

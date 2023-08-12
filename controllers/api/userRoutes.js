@@ -1,38 +1,56 @@
 const router = require('express').Router();
 const { User } = require('../../models/User');
+const withAuth = require('../../utils/auth');
 
 //POST: api/user
-router.post('/', async (req, res)=>{
-    try{
+router.post('/', withAuth, async (req, res)=>{
+    
+    try   {
         const userData = await User.create(req.body);
 
-        req.session.save(()=>{
-            req.session.user_id = userData.
+        const users = userData.map(user => user.get({ plain: true}))
 
+        req.session.save(()=>{
+            req.session.user_id = userData.id;
+            req.session.logged_in = true;
         })
+
+       res.status(200).json(users);
     } catch (err) {
-        res.status(500).json(err);
+        res.status(500).json(err)
     }
+  
 });
 
 //POST: api/user/login
 router.post('/login', async (req, res)=>{
-    try{
-        const userData = await User.findOne({where: {email: req.body.email}});
+    try {
+        const userData = await User.findOne({where: {username: req.body.username}});
 
-        const isValid = await userData.checkPassword(req.body.password);
+        const passIsValid = await userData.checkPassword(req.body.password);
 
-        if (isValid){
-            
+        if (passIsValid){
+
+            req.session.save(()=> {
+                req.session.user_id = userData.id;
+                req.session.logged_in = true;
+            })
+
+           
         }
+
+        document.location.replace('/homepage')
     } catch (err) {
         res.status(500).json(err);
     }
 });
+
 //POST: api/user/logout
 router.post('/logout', async (req, res)=>{
-    try{
-
+    try {
+        if (!req.session.logged_in){
+            document.location.replace('/landingpage');
+        }
     } catch (err) {
         res.status(500).json(err);
     }
