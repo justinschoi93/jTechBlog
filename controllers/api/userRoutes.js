@@ -27,7 +27,7 @@ router.post('/login', async (req, res) => {
     console.log('request made!')
     console.log(req.body);
     
-    const userData = await User.findOne( {where: {username: req.body.username}});
+    const userData = User.findOne( {where: {username: req.body.username}});
     console.log(userData);
 
         const passIsValid = await userData.checkPassword(req.body.password);

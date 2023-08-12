@@ -9,13 +9,13 @@ async function signUpFormHandler (e) {
 
         const response = fetch('/api/users', {
             method: 'POST',
-            body: JSON.stringify({username, email, password}),
+            body: JSON.stringify({username: username, email: email, password: password}),
             headers: {'Content-Type': 'application/json'} 
         })
 
         console.log(response.ok);
         if (response.ok){
-            console.log('Log in successful!');
+            console.log('Sign up successful!');
             document.location.replace('/homepage')
         } else {
             document.location.replace('/login')
@@ -31,10 +31,10 @@ async function logInFormHandler (event) {
     
     if (username && password) {
         console.log(username, password);
-        
+        // const bodyObject = {username: username, password: password}
         const response = await fetch('/api/user/login', {
             method: 'POST',
-            body: JSON.stringify({username, password}),
+            body: JSON.stringify({username: username, password: password}),
             headers: { "Content-Type": "application/json"}
         });
 
