@@ -6,7 +6,7 @@ const routes = require('./controllers');
 const helpers = require('./utils/helpers');
 const mysql2 = require('mysql2');
 
-const sequelize = require('./config/connection');
+const sequelize = require('./config/connections');
 const SequelizeStore = require('connect-session-sequelize')(session.Store);
 
 const app = express();
@@ -35,6 +35,6 @@ const sess = {
 
   app.use(routes);
 
-  sequelize.sycn({force: true}).then(() => {
+  sequelize.sync({force: false}).then(() => {
     app.listen(PORT, () => console.log('Now Listening!'))
   })

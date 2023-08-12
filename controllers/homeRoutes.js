@@ -6,18 +6,14 @@ const { Comment, User, Blogpost } = require('../models');
 router.get('/', async (req, res) => {
     try {
 
-        const blogPostData = await Blogpost.findAll({
-            include: [
-                {model: Comment}
-            ]
-        })
+        const blogPostData = await Blogpost.findAll({include: {model: Comment}});
 
         const blogPosts = blogPostData.map((blogPost) => {
-            blogPost.get({plain: true})
-        })
-
-        res.render( 'homepage', { blogPosts: blogPosts })
-
+           return blogPost.get({plain: true})
+        });
+        
+        console.log(blogPosts);
+        res.render('homepage', { blogPosts : blogPosts});
     } catch (err) {
         res.status(500).json(err);
     }
@@ -32,8 +28,15 @@ router.get('/blogpost/:id', async (req, res) => {
             }
         }
     })
-
-
+    res.render(`blogpost-details`, { comments : commentData} )
 })
 
+
+router.get('/login', async (req, res) => {
+    if (!req.session.logged_in) {
+        res.render('login');
+    } else {
+        res.render('homepage')
+    }
+})
 module.exports = router;

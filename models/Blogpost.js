@@ -20,12 +20,6 @@ Blogpost.init(
 
         },
 
-        date_created: {
-            type: DataTypes.DATE,
-            allowNull: false,
-            defaultValue: DataTypes.NOW,
-        },
-
         body: {
             type: DataTypes.TEXT,
             allowNull: false,

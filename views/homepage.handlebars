@@ -1,10 +1,14 @@
 
 
 <body>
-{{#each blogposts as |blogpost|}}
-    {{< blogpost}} 
+    <h1>BODY!</h1>
+{{#each blogPosts as |blogpost|}}
+    <div>
+        <p>Blog Post!</p>
+    {{> blogpost-details}} 
+    </div>
 {{/each}}
 
 </body>
 
-<script src="../public/js/homepage.js"></script>
+{{!-- <script src="../public/js/homepage.js"></script> --}}

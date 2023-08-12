@@ -1,0 +1,35 @@
+<form class="blog-post-form">
+    <div class="blog-post-{{id}}">
+        <div>
+            <p>
+            {{title}}
+            </p>
+        </div>
+        <div>
+            <p>
+            {{username}}
+            </p>
+        </div>
+        <div>
+        </div>
+        <div>
+            <p>
+            {{body}}
+            </p>
+        </div>
+    </div>
+
+
+    <div>
+        {{#each comments as |comment|}}
+            <div>
+                <p>{{comment.text}}</p>
+                <p>by {{comment.username}}</p>
+                <button class="comment-delete">delete</button>
+            </div>
+        {{/each}}
+    </div>
+
+</form>
+
+<script src="./js/blogpost.js"></script>

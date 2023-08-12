@@ -23,12 +23,15 @@ router.post('/', withAuth, async (req, res)=>{
 });
 
 //POST: api/user/login
-router.post('/login', async (req, res)=>{
-    try {
-        const userData = await User.findOne({where: {username: req.body.username}});
+router.post('/login', async (req, res) => {
+    console.log('request made!')
+    console.log(req.body);
+    
+    const userData = await User.findOne( {where: {username: req.body.username}});
+    console.log(userData);
 
         const passIsValid = await userData.checkPassword(req.body.password);
-
+        console.log(passIsValid);
         if (passIsValid){
 
             req.session.save(()=> {
@@ -39,10 +42,8 @@ router.post('/login', async (req, res)=>{
            
         }
 
-        document.location.replace('/homepage')
-    } catch (err) {
-        res.status(500).json(err);
-    }
+        res.status(200).json({ user: userData, message: 'You are now logged in!'})
+  
 });
 
 //POST: api/user/logout
@@ -55,3 +56,5 @@ router.post('/logout', async (req, res)=>{
         res.status(500).json(err);
     }
 });
+
+module.exports = router;

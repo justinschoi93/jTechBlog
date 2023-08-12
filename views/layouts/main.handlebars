@@ -6,11 +6,13 @@
   <title>Tech Blog</title>
 </head>
 <body>
-  {{#if logged_in}}
-    {{{body}}}
-  {{else}}
+  <h1>TECH BLOG!</h1>
+  {{!-- {{#if logged_in}} --}}
+    <a href="/login">Log Out</a>
+  {{!-- {{else}} --}}
 
-<a href="/login">login</a>
-  {{/if}}
+    <a href="/login">Log In</a>
+  {{!-- {{/if}} --}}
+    {{{body}}}
 </body>
 </html>

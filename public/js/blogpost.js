@@ -1,13 +1,14 @@
-//get specific blogpost
-//get all comments for that blogpost
+document.querySelector(".blog-post-form").addEventListener('click', blogPostSelector);
+document.querySelector(".comment-delete").addEventListener('click', commentDelete);
 
-if (req.session.logged_in) {
+function commentDelete (event) {
+    event.preventDefault;
 
-    const blogpostData = fetch('/api/blogpost/:id', {
-        method: 'GET',
-        
-    })
+    console.log(event)
+}
 
+function blogPostSelector (event) {
+    event.preventDefault();
 
-
+    console.log(EventTarget);
 }
