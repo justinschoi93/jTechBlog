@@ -4,17 +4,17 @@ const withAuth = require('../../utils/auth');
 
 //POST: api/user
 router.post('/', withAuth, async (req, res)=>{
-    
+    console.log('fetch received')
     try   {
         const userData = await User.create(req.body);
-
+        console.log(userData)
         const users = userData.map(user => user.get({ plain: true}))
-
+        console.log(users)
         req.session.save(()=>{
             req.session.user_id = userData.id;
             req.session.logged_in = true;
         })
-
+        // res.send(users);
        res.status(200).json(users);
     } catch (err) {
         res.status(500).json(err)

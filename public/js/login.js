@@ -7,19 +7,20 @@ async function signUpFormHandler (e) {
 
     if (username && email && password) {
 
-        const response = fetch('/api/users', {
+        const response = fetch('/api/user', {
             method: 'POST',
             body: JSON.stringify({username: username, email: email, password: password}),
             headers: {'Content-Type': 'application/json'} 
         })
 
-        console.log(response.ok);
-        if (response.ok){
-            console.log('Sign up successful!');
-            document.location.replace('/homepage')
-        } else {
-            document.location.replace('/login')
-        }
+        console.log('fetch made')
+        console.log(response.ok)
+        // if (response.ok){
+        //     console.log('Sign up successful!');
+        //     document.location.replace('/homepage')
+        // } else {
+        //     document.location.replace('/login')
+        // }
     }
 }
 
@@ -40,12 +41,12 @@ async function logInFormHandler (event) {
 
         console.log('fetch request made')
         // console.log(response.ok);
-        // if (response.ok){
-        //     console.log('Log in successful!');
-        //     // document.location.replace('/homepage')
-        // } else {
-        //     // document.location.replace('/login')
-        // }
+        if (response.ok){
+            console.log('Log in successful!');
+            // document.location.replace('/homepage')
+        } else {
+            // document.location.replace('/login')
+        }
 
     }
 }
